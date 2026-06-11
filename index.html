@@ -469,7 +469,7 @@
   <div class="header">
     <div class="header-tag">Talent Mobility Kata</div>
     <h1>Design your Heroes badge</h1>
-    <p>Every badge tells a story! Over the next 15 minutes, use AI to design a Heroes Badge for your assigned topic that is ready for real-world use. Your design may become a real badge, so make it meaningful, scalable, reusable, and uniquely yours.</p>
+    <p>Every badge tells a story! Over the next 15 minutes, use AI to design a Heroes Badge for your assigned theme that is ready for real-world use. Your design may become a real badge, so make it meaningful, scalable, reusable, and uniquely yours!</p>
   </div>
 
 
@@ -492,7 +492,7 @@
           <div class="rule-icon">
             <svg viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="#5b4de8" stroke-width="1.5"/><path d="M6 3v3l2 2" stroke="#5b4de8" stroke-width="1.5" stroke-linecap="round"/></svg>
           </div>
-          <p><strong>Use EPAM DIAL</strong> Pick any of the models suitable for image generation.</p>
+          <p><strong>Use EPAM DIAL</strong> Pick any of the models suitable for image generation (our recommendation is OpenAI GPT Image 1.5).</p>
         </div>
         <div class="rule-item">
           <div class="rule-icon">
@@ -528,23 +528,40 @@
   <div class="section">
     <div class="section-header">
       <div class="section-num">1</div>
-      <div class="section-title">Complete and use the prompt</div>
+      <div class="section-title">Review what badge you need to design</div>
     </div>
     <div class="section-body">
 
-      <p style="font-size: 13.5px; color: var(--ink-soft); margin-bottom: 20px;">Find your assigned topic below. Fill in every <strong>[YOUR IDEA]</strong> section — let your creativity shine and create something that truly resonates with you! Everything else is already set — just copy, complete, and paste into <a href="https://chat.lab.epam.com/" target="_blank" style="color:var(--accent);text-decoration:underline;">EPAM DIAL</a> using any model suitable for image generation.</p>
+      <p style="font-family:'Syne',sans-serif; font-size:15px; font-weight:700; color:var(--ink); margin-bottom:8px;">Theme 1 — Relocation Journey Badge</p>
+      <p style="font-size:13.5px; color:var(--ink-soft); margin-bottom:20px;">Design a badge that will be assigned to the transferee we supported throughout their relocation journey. The badge will be presented automatically at the completion of the process — once the transferee's start date in the destination comes or the MSR is completed.</p>
+
+      <p style="font-family:'Syne',sans-serif; font-size:15px; font-weight:700; color:var(--ink); margin-bottom:8px;">Theme 2 — Relocation Helping Hand Badge</p>
+      <p style="font-size:13.5px; color:var(--ink-soft);">Design a badge that anyone involved in a relocation can give to someone who helped them along the way. This is a peer-to-peer recognition badge, open to everyone, for those moments when a helping hand made all the difference. It will be replacing the current Relocation Helping Hand badge.</p>
+
+    </div>
+  </div>
+
+  <!-- COMPLETE THE PROMPT -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">2</div>
+      <div class="section-title">Complete the prompt</div>
+    </div>
+    <div class="section-body">
+
+      <p style="font-size: 13.5px; color: var(--ink-soft); margin-bottom: 8px;">Find below a pre-filled prompt for your theme. Complete each <strong>[YOUR IDEA]</strong> section, then copy the finished prompt and run it in <a href="https://chat.lab.epam.com/" target="_blank" style="color:var(--accent);text-decoration:underline;">DIAL</a> using any image-generation model (we recommend OpenAI GPT Image 1.5).</p>
+      <p style="font-size: 13.5px; color: var(--ink-soft); margin-bottom: 16px;">Let your creativity shine! Through your ideas, create a badge that is meaningful, memorable, and reflects something that genuinely resonates with you :)</p>
 
       <div class="prompt-intro">
         <strong>Tip:</strong> The more specific and visual your descriptions, the better the result. Instead of "a fox in a new place", say "a small fox standing in front of a cozy house, holding a key, with a welcome mat and a potted plant by the door".
       </div>
 
-      <p style="font-family:'Syne',sans-serif; font-size:15px; font-weight:700; color:var(--ink); margin-bottom:10px;">Topic 1 — Relocation Journey Badge</p>
-      <p style="font-size:13.5px; color:var(--ink-soft); margin-bottom:16px;">Design a badge that will be assigned to the transferee we supported throughout their relocation journey. The badge will be presented automatically at the completion of the process — once the transferee's start date in the destination comes or the MSR is completed.</p>
+      <p style="font-family:'Syne',sans-serif; font-size:15px; font-weight:700; color:var(--ink); margin-top:20px; margin-bottom:10px;">Theme 1 — Relocation Journey Badge</p>
 
       <div class="prompt-box">
         <button class="copy-btn" onclick="copyPrompt1()">Copy prompt</button>
         <div id="prompt-content-1">
-<span class="fixed">Create a circular badge design featuring </span><span class="fill-in">[YOUR IDEA — one animal character, one symbolic object, or one simple scene that captures the relocation journey you supported together]</span><span class="fixed">.</span>
+<span class="fixed">Create a circular badge design featuring </span><span class="fill-in">[YOUR IDEA — one animal character, one symbolic object, or one simple scene that captures the relocation journey; ask yourself: what did this journey feel like? What did the transferee overcome or achieve? What would you want them to remember? What would you wish them going forward?]</span><span class="fixed">.</span>
 <br><br>
 <span class="fixed">The overall mood should feel </span><span class="fill-in">[YOUR IDEA — e.g. warm and celebratory / adventurous / calm and accomplished / hopeful]</span><span class="fixed">.</span>
 <br><br>
@@ -557,13 +574,12 @@
       </div>
 
       <div style="margin-top: 28px;">
-        <p style="font-family:'Syne',sans-serif; font-size:15px; font-weight:700; color:var(--ink); margin-bottom:10px;">Topic 2 — Relocation Helping Hand Badge</p>
-        <p style="font-size:13.5px; color:var(--ink-soft); margin-bottom:16px;">Design a badge that anyone involved in a relocation can give to someone who helped them along the way. This is a peer-to-peer recognition badge, open to everyone, for those moments when a helping hand made all the difference. It will be replacing the current Relocation Helping Hand badge.</p>
+        <p style="font-family:'Syne',sans-serif; font-size:15px; font-weight:700; color:var(--ink); margin-bottom:10px;">Theme 2 — Relocation Helping Hand Badge</p>
 
         <div class="prompt-box">
           <button class="copy-btn" onclick="copyPrompt2()">Copy prompt</button>
           <div id="prompt-content-2">
-<span class="fixed">Create a circular badge design featuring </span><span class="fill-in">[YOUR IDEA — one animal character, one symbolic object, or one simple scene that captures the spirit of helping someone through relocation]</span><span class="fixed">.</span>
+<span class="fixed">Create a circular badge design featuring </span><span class="fill-in">[YOUR IDEA — one animal character, one symbolic object, or one simple scene that captures the spirit of helping someone through relocation; ask yourself: what does being a helping hand mean to you? What do you guide people through? What would you want this badge to represent about your role?]</span><span class="fixed">.</span>
 <br><br>
 <span class="fixed">The overall mood should feel </span><span class="fill-in">[YOUR IDEA — e.g. warm and grateful / adventurous / calm and accomplished]</span><span class="fixed">.</span>
 <br><br>
@@ -576,15 +592,13 @@
         </div>
       </div>
 
-
-
     </div>
   </div>
 
   <!-- BADGE NAME & TEXT -->
   <div class="section">
     <div class="section-header">
-      <div class="section-num">2</div>
+      <div class="section-num">3</div>
       <div class="section-title">Finalize badge details</div>
     </div>
     <div class="section-body">
@@ -605,13 +619,26 @@
   <!-- SHARE YOUR RESULT -->
   <div class="section">
     <div class="section-header">
-      <div class="section-num">3</div>
+      <div class="section-num">4</div>
       <div class="section-title">Share your result</div>
     </div>
     <div class="section-body">
       <p style="font-size: 13.5px; color: var(--ink-soft);">Place the image and all text on the Miro board in the designated section.</p>
     </div>
   </div>
+
+  <!-- VOTE FOR YOUR FAVORITE -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">5</div>
+      <div class="section-title">Vote for your favorite design</div>
+    </div>
+    <div class="section-body">
+      <p style="font-size: 13.5px; color: var(--ink-soft);">Once everyone has added their results to Miro, review the designs, choose your favorite, and leave an emoji reaction on it.</p>
+      <p style="font-size: 13.5px; color: var(--ink-soft); margin-top: 8px;">The most popular designs will become the prototypes for the real badges!</p>
+    </div>
+  </div>
+
   <div class="footer">
     <p>Talent Mobility Workshop 2026 &nbsp;·&nbsp; Krakow</p>
   </div>
@@ -621,7 +648,7 @@
 <script>
   function copyPrompt1() {
     const lines = [
-      "Create a circular badge design featuring [YOUR IDEA — one animal character, one symbolic object, or one simple scene that captures the relocation journey you supported together].",
+      "Create a circular badge design featuring [YOUR IDEA — one animal character, one symbolic object, or one simple scene that captures the relocation journey; ask yourself: what did this journey feel like? What did the transferee overcome or achieve? What would you want them to remember? What would you wish them going forward?].",
       "",
       "The overall mood should feel [YOUR IDEA — e.g. warm and celebratory / adventurous / calm and accomplished / hopeful].",
       "",
@@ -640,7 +667,7 @@
 
   function copyPrompt2() {
     const lines = [
-      "Create a circular badge design featuring [YOUR IDEA — one animal character, one symbolic object, or one simple scene that captures the spirit of helping someone through relocation].",
+      "Create a circular badge design featuring [YOUR IDEA — one animal character, one symbolic object, or one simple scene that captures the spirit of helping someone through relocation; ask yourself: what does being a helping hand mean to you? What do you guide people through? What would you want this badge to represent about your role?].",
       "",
       "The overall mood should feel [YOUR IDEA — e.g. warm and grateful / adventurous / calm and accomplished].",
       "",
