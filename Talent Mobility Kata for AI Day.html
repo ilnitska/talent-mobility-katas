@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Talent Mobility Kata for AI Day</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #1a1a2e;
+    --ink-soft: #4a4a6a;
+    --ink-muted: #8888aa;
+    --surface: #ffffff;
+    --surface-2: #f5f4f9;
+    --surface-3: #eeedf5;
+    --accent: #5b4de8;
+    --accent-light: #ece9fd;
+    --accent-mid: #8878f0;
+    --gold: #e8a020;
+    --gold-light: #fef3dc;
+    --green: #1d9e75;
+    --green-light: #e1f5ee;
+    --red: #c93030;
+    --red-light: #fcebeb;
+    --border: rgba(90, 80, 160, 0.12);
+    --radius: 14px;
+    --radius-sm: 8px;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--ink);
+    background: #f0eefb;
+    padding: 0;
+  }
+
+  .page {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+  }
+
+  /* HEADER */
+  .header {
+    text-align: center;
+    padding: 52px 32px 44px;
+    background: var(--accent);
+    border-radius: 24px;
+    margin-bottom: 40px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 220px; height: 220px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.07);
+  }
+
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: -40px; left: -40px;
+    width: 160px; height: 160px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.05);
+  }
+
+  .header-tag {
+    display: inline-block;
+    background: rgba(255,255,255,0.18);
+    color: #fff;
+    font-family: 'Syne', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border-radius: 20px;
+    margin-bottom: 18px;
+  }
+
+  .header h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: 34px;
+    font-weight: 800;
+    color: #fff;
+    line-height: 1.2;
+    margin-bottom: 14px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .header p {
+    color: rgba(255,255,255,0.82);
+    font-size: 15px;
+    max-width: 520px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* SECTIONS */
+  .section {
+    background: var(--surface);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    margin-bottom: 20px;
+    overflow: hidden;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 20px 24px 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-num {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #fff;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .section-num.gold { background: var(--gold); }
+  .section-num.green { background: var(--green); }
+
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  .section-body {
+    padding: 20px 24px 24px;
+  }
+
+  /* DELIVERABLES */
+  .deliverables {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    padding: 20px 24px 24px;
+  }
+
+  .deliverable-card {
+    background: var(--surface-2);
+    border-radius: var(--radius-sm);
+    padding: 16px;
+    border: 1px solid var(--border);
+  }
+
+  .deliverable-card .d-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .deliverable-card .d-label {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+
+  .deliverable-card .d-desc {
+    font-size: 12px;
+    color: var(--ink-soft);
+    line-height: 1.5;
+  }
+
+  /* GROUND RULES */
+  .rules-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .rule-item {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    background: var(--surface-2);
+    border-radius: var(--radius-sm);
+    padding: 12px 14px;
+    border: 1px solid var(--border);
+  }
+
+  .rule-icon {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--accent-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .rule-icon svg { width: 12px; height: 12px; }
+
+  .rule-item p {
+    font-size: 13px;
+    color: var(--ink-soft);
+    line-height: 1.5;
+  }
+
+  .rule-item p strong {
+    color: var(--ink);
+    font-weight: 500;
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  /* PROMPT BOX */
+  .prompt-intro {
+    font-size: 14px;
+    color: var(--ink-soft);
+    margin-bottom: 16px;
+    padding: 12px 16px;
+    background: var(--gold-light);
+    border-radius: var(--radius-sm);
+    border-left: 3px solid var(--gold);
+  }
+
+  .prompt-intro strong { color: var(--ink); }
+
+  .prompt-box {
+    background: #1a1a2e;
+    border-radius: var(--radius-sm);
+    padding: 24px;
+    font-family: 'Courier New', monospace;
+    font-size: 13.5px;
+    line-height: 1.85;
+    color: #c9c8e8;
+    position: relative;
+  }
+
+  .prompt-box .fill-in {
+    background: rgba(139, 120, 240, 0.25);
+    border: 1px dashed rgba(139, 120, 240, 0.6);
+    border-radius: 4px;
+    padding: 1px 6px;
+    color: #b8aff8;
+    font-style: italic;
+  }
+
+  .prompt-box .fixed {
+    color: #e8e6ff;
+  }
+
+  .copy-btn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.7);
+    font-size: 11px;
+    font-family: 'DM Sans', sans-serif;
+    padding: 5px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .copy-btn:hover { background: rgba(255,255,255,0.18); }
+
+  /* TIPS TABLE */
+  .tips-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    margin-top: 4px;
+  }
+
+  .tips-table th {
+    text-align: left;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    padding: 0 12px 10px;
+  }
+
+  .tips-table td {
+    padding: 9px 12px;
+    color: var(--ink-soft);
+    border-top: 1px solid var(--border);
+    vertical-align: top;
+  }
+
+  .tips-table td:first-child {
+    color: var(--ink);
+    font-weight: 500;
+    width: 38%;
+  }
+
+  .tips-table tr:hover td { background: var(--surface-2); }
+
+  /* COMPLETE TABLE */
+  .complete-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+
+  .complete-table th {
+    text-align: left;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    padding: 0 16px 10px;
+  }
+
+  .complete-table td {
+    padding: 12px 16px;
+    border-top: 1px solid var(--border);
+    vertical-align: middle;
+  }
+
+  .complete-table td:first-child { color: var(--ink); font-weight: 500; width: 42%; }
+  .complete-table td:last-child {
+    background: var(--surface-2);
+    color: var(--ink-muted);
+    font-style: italic;
+    font-size: 13px;
+  }
+
+  /* CHECKLISTS */
+  .checklist {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .checklist li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 13px;
+    color: var(--ink-soft);
+    background: var(--surface-2);
+    border-radius: var(--radius-sm);
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    line-height: 1.4;
+  }
+
+  .checklist li .box {
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+    border: 1.5px solid var(--accent-mid);
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .export-steps {
+    counter-reset: step;
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .export-steps li {
+    counter-increment: step;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 13px;
+    color: var(--ink-soft);
+    background: var(--green-light);
+    border-radius: var(--radius-sm);
+    padding: 10px 12px;
+    border: 1px solid rgba(29,158,117,0.2);
+    line-height: 1.4;
+  }
+
+  .export-steps li::before {
+    content: counter(step);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--green);
+    color: #fff;
+    font-family: 'Syne', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .export-steps li strong { color: var(--ink); font-weight: 500; }
+
+  /* NOTICE BANNER */
+  .notice {
+    display: flex;
+    gap: 12px;
+    background: var(--accent-light);
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+    border: 1px solid rgba(91,77,232,0.2);
+    margin-bottom: 16px;
+  }
+
+  .notice-icon {
+    font-size: 18px;
+    flex-shrink: 0;
+    line-height: 1.5;
+  }
+
+  .notice p { font-size: 13.5px; color: var(--ink-soft); }
+  .notice p strong { color: var(--accent); }
+
+  /* FOOTER */
+  .footer {
+    text-align: center;
+    padding: 32px;
+    background: var(--surface);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    margin-top: 12px;
+  }
+
+  .footer p { font-size: 13px; color: var(--ink-muted); }
+  .footer .heart { color: var(--accent); }
+
+  @media (max-width: 600px) {
+    .deliverables, .rules-grid, .checklist, .export-steps {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-tag">Talent Mobility Kata</div>
+    <h1>Design your Heroes badge</h1>
+    <p>Every badge tells a story! Over the next 15 minutes, use AI to design a Heroes Badge for your assigned topic that is ready for real-world use. Your design may become a real badge, so make it meaningful, scalable, reusable, and uniquely yours.</p>
+  </div>
+
+
+
+  <!-- GROUND RULES -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num gold">!</div>
+      <div class="section-title">Ground rules — read before you start</div>
+    </div>
+    <div class="section-body">
+      <div class="rules-grid">
+        <div class="rule-item">
+          <div class="rule-icon">
+            <svg viewBox="0 0 12 12" fill="none"><path d="M6 1L7.5 4.5H11L8.5 7L9.5 11L6 9L2.5 11L3.5 7L1 4.5H4.5L6 1Z" fill="#5b4de8"/></svg>
+          </div>
+          <p><strong>Animals, objects, or characters</strong> Prefer animals over humans. Symbolic objects also work well. If using people, include two or more characters from diverse groups.</p>
+        </div>
+        <div class="rule-item">
+          <div class="rule-icon">
+            <svg viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="#5b4de8" stroke-width="1.5"/><path d="M6 3v3l2 2" stroke="#5b4de8" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </div>
+          <p><strong>Use EPAM DIAL</strong> Pick any of the models suitable for image generation.</p>
+        </div>
+        <div class="rule-item">
+          <div class="rule-icon">
+            <svg viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2v8" stroke="#5b4de8" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </div>
+          <p><strong>Be inclusive and respectful</strong> No offensive imagery, no sarcastic or negative meanings, nothing touching on race or gender.</p>
+        </div>
+
+
+        <div class="rule-item">
+          <div class="rule-icon">
+            <svg viewBox="0 0 12 12" fill="none"><path d="M3 6l2.5 2.5L9 3" stroke="#5b4de8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <p><strong>Be precise, not vague</strong> Use as many descriptive details as possible. Vague prompts produce inconsistent results.</p>
+        </div>
+        <div class="rule-item">
+          <div class="rule-icon">
+            <svg viewBox="0 0 12 12" fill="none"><path d="M2 4h8M2 6h6M2 8h4" stroke="#5b4de8" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </div>
+          <p><strong>No text on the badge</strong> Do not add any text on the image itself, because AI often distorts text.</p>
+        </div>
+        <div class="rule-item">
+          <div class="rule-icon">
+            <svg viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="4" stroke="#5b4de8" stroke-width="1.5"/><path d="M6 4v4M4 6h4" stroke="#5b4de8" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </div>
+          <p><strong>Keep it simple</strong> Avoid too many small objects in one image. One clear subject reads much better at small sizes.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- YOUR PROMPT -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">1</div>
+      <div class="section-title">Complete and use the prompt</div>
+    </div>
+    <div class="section-body">
+
+      <p style="font-size: 13.5px; color: var(--ink-soft); margin-bottom: 20px;">Find your assigned topic below. Fill in every <strong>[YOUR IDEA]</strong> section — let your creativity shine and create something that truly resonates with you! Everything else is already set — just copy, complete, and paste into <a href="https://chat.lab.epam.com/" target="_blank" style="color:var(--accent);text-decoration:underline;">EPAM DIAL</a> using any model suitable for image generation.</p>
+
+      <div class="prompt-intro">
+        <strong>Tip:</strong> The more specific and visual your descriptions, the better the result. Instead of "a fox in a new place", say "a small fox standing in front of a cozy house, holding a key, with a welcome mat and a potted plant by the door".
+      </div>
+
+      <p style="font-family:'Syne',sans-serif; font-size:15px; font-weight:700; color:var(--ink); margin-bottom:10px;">Topic 1 — Relocation Journey Badge</p>
+      <p style="font-size:13.5px; color:var(--ink-soft); margin-bottom:16px;">Design a badge that will be assigned to the transferee we supported throughout their relocation journey. The badge will be presented automatically at the completion of the process — once the transferee's start date in the destination comes or the MSR is completed.</p>
+
+      <div class="prompt-box">
+        <button class="copy-btn" onclick="copyPrompt1()">Copy prompt</button>
+        <div id="prompt-content-1">
+<span class="fixed">Create a circular badge design featuring </span><span class="fill-in">[YOUR IDEA — one animal character, one symbolic object, or one simple scene that captures the relocation journey you supported together]</span><span class="fixed">.</span>
+<br><br>
+<span class="fixed">The overall mood should feel </span><span class="fill-in">[YOUR IDEA — e.g. warm and celebratory / adventurous / calm and accomplished / hopeful]</span><span class="fixed">.</span>
+<br><br>
+<span class="fixed">Draw the badge in a flat vector style with clean lines and vibrant, contrasting colors. Use </span><span class="fill-in">[YOUR IDEA — name 2–3 specific colors, e.g. warm amber and deep teal / soft gold and midnight blue / coral and sage green]</span><span class="fixed"> as the main color palette.</span>
+<br><br>
+<span class="fixed">Colors must have strong contrast against each other and against the background for accessibility. Avoid colors that are too bright, too dark, or that clash. Do not use a white outline as the badge border. The background should be simple and quiet.</span>
+<br><br>
+<span class="fixed">The composition must be round, centered, and easy to read at a glance. One clear main subject in the center. No text. No small cluttered details. No photo-realistic style. No logos. No copyrighted characters.</span>
+        </div>
+      </div>
+
+      <div style="margin-top: 28px;">
+        <p style="font-family:'Syne',sans-serif; font-size:15px; font-weight:700; color:var(--ink); margin-bottom:10px;">Topic 2 — Relocation Helping Hand Badge</p>
+        <p style="font-size:13.5px; color:var(--ink-soft); margin-bottom:16px;">Design a badge that anyone involved in a relocation can give to someone who helped them along the way. This is a peer-to-peer recognition badge, open to everyone, for those moments when a helping hand made all the difference. It will be replacing the current Relocation Helping Hand badge.</p>
+
+        <div class="prompt-box">
+          <button class="copy-btn" onclick="copyPrompt2()">Copy prompt</button>
+          <div id="prompt-content-2">
+<span class="fixed">Create a circular badge design featuring </span><span class="fill-in">[YOUR IDEA — one animal character, one symbolic object, or one simple scene that captures the spirit of helping someone through relocation]</span><span class="fixed">.</span>
+<br><br>
+<span class="fixed">The overall mood should feel </span><span class="fill-in">[YOUR IDEA — e.g. warm and grateful / adventurous / calm and accomplished]</span><span class="fixed">.</span>
+<br><br>
+<span class="fixed">Draw the badge in a flat vector style with clean lines and vibrant, contrasting colors. Use </span><span class="fill-in">[YOUR IDEA — name 2–3 specific colors, e.g. warm amber and deep teal / soft gold and midnight blue / coral and sage green]</span><span class="fixed"> as the main color palette.</span>
+<br><br>
+<span class="fixed">Colors must have strong contrast against each other and against the background for accessibility. Avoid colors that are too bright, too dark, or that clash. Do not use a white outline as the badge border. The background should be simple and quiet.</span>
+<br><br>
+<span class="fixed">The composition must be round, centered, and easy to read at a glance. One clear main subject in the center. No text. No small cluttered details. No photo-realistic style. No logos. No copyrighted characters.</span>
+          </div>
+        </div>
+      </div>
+
+
+
+    </div>
+  </div>
+
+  <!-- BADGE NAME & TEXT -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">2</div>
+      <div class="section-title">Finalize badge details</div>
+    </div>
+    <div class="section-body">
+      <p style="font-size: 13.5px; color: var(--ink-soft); margin-bottom: 8px;">Once you have your image, decide on these three things (you can use AI to generate or refine your ideas, but don't ask AI to add the text to the image — keep all text separate):</p>
+      <ul style="font-size: 13.5px; color: var(--ink-soft); margin-bottom: 16px; padding-left: 20px; line-height: 2;">
+        <li>Badge name (2–5 words)</li>
+        <li>Badge description (1–2 short sentences)</li>
+        <li>Text on badge (1–3 words)</li>
+      </ul>
+
+    </div>
+  </div>
+
+
+
+
+
+  <!-- SHARE YOUR RESULT -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">3</div>
+      <div class="section-title">Share your result</div>
+    </div>
+    <div class="section-body">
+      <p style="font-size: 13.5px; color: var(--ink-soft);">Place the image and all text on the Miro board in the designated section.</p>
+    </div>
+  </div>
+  <div class="footer">
+    <p>Talent Mobility Workshop 2026 &nbsp;·&nbsp; Krakow</p>
+  </div>
+
+</div>
+
+<script>
+  function copyPrompt1() {
+    const lines = [
+      "Create a circular badge design featuring [YOUR IDEA — one animal character, one symbolic object, or one simple scene that captures the relocation journey you supported together].",
+      "",
+      "The overall mood should feel [YOUR IDEA — e.g. warm and celebratory / adventurous / calm and accomplished / hopeful].",
+      "",
+      "Draw the badge in a flat vector style with clean lines and vibrant, contrasting colors. Use [YOUR IDEA — name 2–3 specific colors, e.g. warm amber and deep teal / soft gold and midnight blue / coral and sage green] as the main color palette.",
+      "",
+      "Colors must have strong contrast against each other and against the background for accessibility. Avoid colors that are too bright, too dark, or that clash. Do not use a white outline as the badge border. The background should be simple and quiet.",
+      "",
+      "The composition must be round, centered, and easy to read at a glance. One clear main subject in the center. No text. No small cluttered details. No photo-realistic style. No logos. No copyrighted characters."
+    ];
+    navigator.clipboard.writeText(lines.join("\n")).then(() => {
+      const btns = document.querySelectorAll('.copy-btn');
+      btns[0].textContent = 'Copied!';
+      setTimeout(() => btns[0].textContent = 'Copy prompt', 2000);
+    });
+  }
+
+  function copyPrompt2() {
+    const lines = [
+      "Create a circular badge design featuring [YOUR IDEA — one animal character, one symbolic object, or one simple scene that captures the spirit of helping someone through relocation].",
+      "",
+      "The overall mood should feel [YOUR IDEA — e.g. warm and grateful / adventurous / calm and accomplished].",
+      "",
+      "Draw the badge in a flat vector style with clean lines and vibrant, contrasting colors. Use [YOUR IDEA — name 2–3 specific colors, e.g. warm amber and deep teal / soft gold and midnight blue / coral and sage green] as the main color palette.",
+      "",
+      "Colors must have strong contrast against each other and against the background for accessibility. Avoid colors that are too bright, too dark, or that clash. Do not use a white outline as the badge border. The background should be simple and quiet.",
+      "",
+      "The composition must be round, centered, and easy to read at a glance. One clear main subject in the center. No text. No small cluttered details. No photo-realistic style. No logos. No copyrighted characters."
+    ];
+    navigator.clipboard.writeText(lines.join("\n")).then(() => {
+      const btns = document.querySelectorAll('.copy-btn');
+      btns[1].textContent = 'Copied!';
+      setTimeout(() => btns[1].textContent = 'Copy prompt', 2000);
+    });
+  }
+</script>
+
+</body>
+</html>
